@@ -1,0 +1,39 @@
+{
+  "name": "jquery-mobile-datebox",
+  "title": "jQuery Mobile DateBox",
+  "description": "jQM Plugin to provide a Date and Time Picker",
+  "version": "1.4.5",
+  "homepage": "http://dev.jtsage.com/jQM-DateBox/",
+  "author": {
+    "name": "JTSage and other contributors",
+    "url": "https://github.com/jtsage/jquery-mobile-datebox/blob/master/AUTHORS.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jtsage/jquery-mobile-datebox.git"
+  },
+  "bugs": "https://github.com/jtsage/jquery-mobile-datebox/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jtsage/jquery-mobile-datebox/blob/master/LICENSE.txt"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-qunit": "^0.5.2",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-git-committers": "^0.1.2",
+    "grunt-html": "^1.4.0",
+    "grunt-jekyll": "git://github.com/dannygarcia/grunt-jekyll.git",
+    "grunt-prettify": "^0.3.5",
+    "node-gettext": "^0.2.14"
+  },
+  "dependencies": {}
+}
