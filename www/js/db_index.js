@@ -87,10 +87,10 @@ function ListDBValues(ctrl) {
 					//alert("here: " + result.rows.length);
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
-						alert("Saving Date: " + row.SavingDate);
-						var d = moment(row.SavingDate);
+						//alert("Saving Date -> " + row.SavingDate + " |" + row.Amount + "|");
+						var d = moment(row.SavingDate).format(DT_FORMAT);
 						//alert(d);
-						ctrl.append('<br>|' + row.SavingID + '|' + d.format(DT_FORMAT) + '|' + row.Amount + '|' + row.Product + '|' + row.Royalty + '|' + row.Place + '|' + row.Type + '|' + row.CreatedTime);
+						ctrl.append('<br>|' + row.SavingID + '|' + d + '|' + row.Amount + '|' + row.Product + '|' + row.Royalty + '|' + row.Place + '|' + row.Type + '|' + row.CreatedTime);
 					}
 					if (result.rows.length == 0){
 						//alert("No data");
@@ -124,7 +124,7 @@ function runSumSql(ctrl, sqlStr) {
 					//alert("here: " + result.rows.length);
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(0);
-						//alert(row.Total);
+						//alert(row.Total + ", " + row.NumSavings);
 						ctrl.html("$" + row.Total.toFixed(2) + " (" + row.NumSavings + ")");
 					}
 					if (result.rows.length == 0){
