@@ -16,7 +16,7 @@ function errorHandler(transaction, error) {
 function successCallBack() {
 	//alert("DEBUGGING: success");
 	
-	refreshTotal();
+	ListDBValues($("#table-column-toggle"));
 }
  
 function nullHandler(){
@@ -71,7 +71,7 @@ function ListDBValues(ctrl) {
  
 	// this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
 	// content and not just keep repeating lines
-	ctrl.html('');
+	//ctrl.html('');
 	
 	// this next section will select all the content from the User table and then go through it row by row
 	// appending the UserId FirstName LastName to the #lbUsers element on the page
@@ -86,18 +86,20 @@ function ListDBValues(ctrl) {
 				//alert(result);
 				if (result != null && result.rows != null) {
 					//alert("here: " + result.rows.length);
+					var trHTML = '';
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
 						var d = moment(row.SavingDate);
 						//alert(d);
 						//alert(row.Total);
-						result = '<tr><td>' + row.SavingID + '</td></td>' + d.format(DT_FORMAT);
-						result += '</td><td>' + row.Amount + '</td><td>' + row.Product;
-						result += '</td><td>' + row.Royalty + '</td><td>' + row.Place;
-						result += '</td><td>' + row.Type + '</td><td>' + row.CreatedTime + "</td></tr>";
-						alert(result)
-						ctrl.append( result );
+						trHTML += '<tr><th>' + row.SavingID + '</th><td>' + d.format(DT_FORMAT);
+						trHTML += '</td><td>' + row.Amount + '</td><td>' + row.Product;
+						trHTML += '</td><td>' + row.Royalty + '</td><td>' + row.Place;
+						trHTML += '</td><td>' + row.Type + '</td><td>' + row.CreatedTime + "</td></tr>";
+						//alert(trHTML)
 					}
+					ctrl.append( trHTML );
+					ctrl.table( "refresh" );
 					if (result.rows.length == 0){
 						//alert("No data");
 						ctrl.append('<br>No History Data');

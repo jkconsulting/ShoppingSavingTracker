@@ -3,13 +3,18 @@
 	<head>
 		<title>View Saving History</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<!--<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>-->
-		
-		<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
-		<!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
-
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<!-- need to load this common javascript first as functions are being used by other javascripts -->
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src="lib/moment.min.js"></script>
+		<script type="text/javascript" src="lib/date.js"></script>
+		<script type="text/javascript" src="lib/jquery.formatCurrency-1.4.0.js"></script>
+		<!--
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		-->
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.min.css" />
 	<link type="text/css" href="http://cdn.jtsage.com/css/demos.css" rel="stylesheet" />
     <!-- NOTE: Script load order is significant! -->
@@ -32,10 +37,10 @@
     });
     </script>
 
-	<!--<script type="text/javascript" src="js/database.js"></script>-->
+	<script type="text/javascript" src="js/db_view_saving_history.js"></script>
 	
 	</head>
-	<body>
+	<body onload="onBodyLoad()">
 		<div data-role="page">
 		<div data-role="header" class="ui-btn ui-input-btn ui-shadow ui-corner-all">
 			<a href="#" class="ui-btn ui-input-btn ui-shadow ui-icon-arrow-l ui-corner-all ui-btn-icon-left" data-rel="back" id="btnGoBack">Go Back</a>
@@ -43,19 +48,26 @@
 		</div><!-- /header -->
 		<div data-role="content">
 			<div>
-				<table>
-					<tr>
-						<td>Saving Date</td>
-						<td>Amount</td>
-						<td>Product</td>
-						<td>Royalty</td>
-						<td>Place</td>
-						<td>Type</td>
-						<td>Created</td>
-					</tr>				
+				<!--<table data-role="table" id="tblSavingHistory" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">-->
+				<table data-role="table" id="tblSavingHistory" data-mode="reflow" class="ui-body-d ui-shadow table-stripe ui-responsive">
+					<thead>
+						<tr>
+							<th data-priority="1"><abbr title="Saving ID">ID</abbr></th>
+							<th><abbr title="Saving Date">Date</abbr></th>
+							<th>Amount</th>
+							<th>Royalty</th>
+							<th data-priority="2">Place</th>
+							<th data-priority="2">Type</th>
+							<th data-priority="2">Product</th>							
+							<th data-priority="3">Created</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
 				</table>
-				<span id="savingHistory"></span>				
-			</div>
+		
+			</div>		
 		</div><!-- /content -->
 		<div data-role="footer">
 			<h4></h4>
