@@ -3,13 +3,16 @@
 	<head>
 		<title>Shopping Saving Tracker</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- need to load this common javascript first as functions are being used by other javascripts -->
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src="lib/date.js"></script>
+		<script type="text/javascript" src="lib/jquery.formatCurrency-1.4.0.js"></script>
 		<!--
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		-->
-		<script type="text/javascript" src="lib/date.js"></script>
-		
+	
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.min.css" />
 	<link type="text/css" href="http://cdn.jtsage.com/css/demos.css" rel="stylesheet" />
@@ -115,9 +118,6 @@
 		<script>
 			$( "#btnViewHistory" ).click( function() {
 				ListDBValues($("#savingHistory"));
-				//alert("get total");
-				//thisWeekSavingSQL = "SELECT	 SUM(Amount) AS Total FROM Savings;";
-				//runSumSql($("#thisWeekSaving"), thisWeekSavingSQL);			
 			});
 			$( "#btnClearData" ).click( function() {
 				ClearData();
@@ -130,17 +130,50 @@
 			
 			$(document).on("pageshow","",function(){
 			  //alert("pageshow event fired");
-	/*
-				var thisWeekSavingSQL = "SELECT SUM(Amount) as Total FROM Savings "
-				thisWeekSavingSQL += "WHERE SavingDate >= curdate() - INTERVAL DAYOFWEEK(curdate())-1 DAY "
-				thisWeekSavingSQL += "AND SavingDate < curdate() + INTERVAL 8-DAYOFWEEK(curdate()) DAY;";
-	*/
-	//			var thisWeekSavingSQL = "SELECT SUM(Amount) as Total FROM Savings WHERE SavingDate >= DATE_SUB(curdate(), INTERVAL (DAYOFWEEK(curdate())-1) DAY) AND SavingDate < DATE_ADD(curdate(), INTERVAL (8-DAYOFWEEK(curdate())) DAY);";
-	//			thisWeekSavingSQL = "SELECT	 SUM(Amount) AS Total FROM Savings;";
-	//			runSumSql($("#thisWeekSaving"), thisWeekSavingSQL);			  
 			});		
 			
+			function refreshTotal(){
+				//alert("refresh total");
+				var currDt = new Date();
+				var dayOfWeek = currDt.getDay();				
+				
+				//use date.js library
+				weekStartDt = Date.today().addDays(-dayOfWeek);
+				weekEndDt = Date.today().addDays(7-dayOfWeek);
+				//alert("Week Start: " + weekStartDt + ", Week End: " + weekEndDt);
+	/*
+				var thisWeekSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings ";
+				thisWeekSavingSQL += "WHERE SavingDate >= curdate() - INTERVAL DAYOFWEEK(curdate())-1 DAY "
+				thisWeekSavingSQL += "AND SavingDate < curdate() + INTERVAL 8-DAYOFWEEK(curdate()) DAY;";
+	*/				
+				var thisWeekSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings ";
+				thisWeekSavingSQL += "WHERE SavingDate >= " + GetDateUTC(weekStartDt) + " ";
+				thisWeekSavingSQL += "AND SavingDate < " + GetDateUTC(weekEndDt) + ";";
+				
+				var daysInMonth=Date.getDaysInMonth(currDt.getFullYear(),currDt.getMonth());
+				monthStartDt = new Date(currDt.getFullYear(), currDt.getMonth(), 1);
+				monthEndDt = new Date(currDt.getFullYear(), currDt.getMonth(), daysInMonth);
+				//alert("Month Start: " + monthStartDt + ", Month End: " + monthEndDt);
+				
+				var thisMonthSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings ";
+				thisMonthSavingSQL += "WHERE SavingDate >= " + GetDateUTC(monthStartDt) + " ";
+				thisMonthSavingSQL += "AND SavingDate < " + GetDateUTC(monthEndDt) + ";";
+				
+				yearStartDt = new Date(currDt.getFullYear(), 0, 1);
+				yearEndDt = new Date(currDt.getFullYear(), 11, 31);
+				//alert("Year Start: " + yearStartDt + ", Year End: " + yearEndDt);				
 
+				var thisYearSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings ";
+				thisYearSavingSQL += "WHERE SavingDate >= " + GetDateUTC(yearStartDt) + " ";
+				thisYearSavingSQL += "AND SavingDate < " + GetDateUTC(yearEndDt) + ";";
+				
+				var allSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings;";
+				
+				runSumSql($("#thisWeekSaving"), thisWeekSavingSQL);
+				runSumSql($("#thisMonthSaving"), thisMonthSavingSQL);
+				runSumSql($("#thisYearSaving"), thisYearSavingSQL);
+				runSumSql($("#allSaving"), allSavingSQL);				
+			};
 			
 		</script>
 
