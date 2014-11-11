@@ -79,7 +79,7 @@ function AddValueToDB() {
 		// easily from the table.
 		//alert("add value to table");
 		
-		var savingDateUTC = moment($('#txtSavingDate').val(), DT_FORMAT);
+		var savingDateUTC = moment($('#txtSavingDate').val(), DT_FORMAT).valueOf();
 		//alert("Saving Date: " + $('#txtSavingDate').val() + " => " + savingDateUTC);
 		
 		tx.executeSql( 'INSERT INTO Savings(SavingDate, Amount, Product, Royalty, Place, Type, CreatedTime) VALUES (?,?,?,?,?,?,?)',[savingDateUTC, $('#txtAmount').val(), $('#txtProduct').val(), $('#selRoyalty').val(), $('#selPlace').val(), $('#selType').val(), GetCurrentTime()], nullHandler,errorHandler);
