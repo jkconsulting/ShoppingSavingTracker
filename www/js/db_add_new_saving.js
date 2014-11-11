@@ -78,10 +78,9 @@ function AddValueToDB() {
 		// note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
 		// easily from the table.
 		//alert("add value to table");
-		var savingDate = Date.parse($('#txtSavingDate').val());
-		//alert("Saving Date: " + savingDate);
-		var savingDateUTC = GetDateUTC(savingDate);
-	  	//alert("UTC: " + savingDateUTC);
+		
+		var savingDateUTC = moment($('#txtSavingDate').val(), DT_FORMAT);
+		alert("Saving Date: " + $('#txtSavingDate').val() + " => " + savingDateUTC);
 		
 		tx.executeSql( 'INSERT INTO Savings(SavingDate, Amount, Product, Royalty, Place, Type, CreatedTime) VALUES (?,?,?,?,?,?,?)',[savingDateUTC, $('#txtAmount').val(), $('#txtProduct').val(), $('#selRoyalty').val(), $('#selPlace').val(), $('#selType').val(), GetCurrentTime()], nullHandler,errorHandler);
 	},errorHandler,successCallBack_Add); 

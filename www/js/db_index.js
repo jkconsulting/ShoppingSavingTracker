@@ -53,7 +53,7 @@ function onBodyLoad(){
 		//HTML5 uses SQLite, which does not have a storage class set aside for storing dates and/or times
 		//See documetation: http://www.sqlite.org/datatype3.html
 		//Store DATETIME that will be used for calculation as UTC
-+
+
 		//tx.executeSql( 'DROP TABLE Savings;' );
 		tx.executeSql( 'CREATE TABLE IF NOT EXISTS Savings(SavingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SavingDate INTEGER NOT NULL, Amount MONEY NOT NULL, Product TEXT, Royalty TEXT, Place TEXT, Type TEXT, CreatedTime DATETIME)', [], nullHandler, errorHandler);
 
@@ -78,7 +78,6 @@ function ListDBValues(ctrl) {
 	db.transaction(function(tx) {
 			
 		var sqlStr = 'SELECT * FROM Savings ORDER BY SavingID DESC;';
-		//sqlStr = 'SELECT * FROM Savings where SavingDate >= CURRENT_DATE ORDER BY SavingID DESC;';
 	
 		//alert(sqlStr);
 		tx.executeSql(sqlStr, [],
@@ -88,8 +87,10 @@ function ListDBValues(ctrl) {
 					//alert("here: " + result.rows.length);
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
-						//alert(row.Total);
-						ctrl.append('<br>|' + row.SavingID + '|' + row.SavingDate + '|' + row.Amount + '|' + row.Product + '|' + row.Royalty + '|' + row.Place + '|' + row.Type + '|' + row.CreatedTime);
+						alert("Saving Date: " + row.SavingDate);
+						var d = moment(row.SavingDate);
+						//alert(d);
+						ctrl.append('<br>|' + row.SavingID + '|' + d.format(DT_FORMAT) + '|' + row.Amount + '|' + row.Product + '|' + row.Royalty + '|' + row.Place + '|' + row.Type + '|' + row.CreatedTime);
 					}
 					if (result.rows.length == 0){
 						//alert("No data");

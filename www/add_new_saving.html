@@ -4,7 +4,8 @@
 		<title>Add New Saving</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- need to load this common javascript first as functions are being used by other javascripts -->
-		<script type="text/javascript" src="js/global.js"></script>		
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src="lib/moment.min.js"></script>
 		<script type="text/javascript" src="lib/date.js"></script>
 		
 		<!--<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>-->
@@ -43,9 +44,7 @@
 		<div data-role="header" class="ui-btn ui-input-btn ui-shadow ui-corner-all">
 			<a href="#" class="ui-btn ui-input-btn ui-shadow ui-icon-arrow-l ui-corner-all ui-btn-icon-left" data-rel="back" id="btnGoBack">Go Back</a>
 			<h1>Add New Saving</h1>
-		</div>
-
-		<!-- /header -->
+		</div><!-- /header -->
 		<div data-role="content">
 			<div>
 				<table>
@@ -67,7 +66,7 @@
 							<div class="ui-field-contain">
 								<select name="selRoyalty" id="selRoyalty" data-native-menu="false">
 									<option value="PCPLUS">PCPLUS</option>
-									<option value="CheckOut51">CheckOut51</option>
+									<option value="Checkout51">Checkout51</option>
 									<option value="Groupon Snap">Groupon Snap</option>
 								</select>
 							</div>
@@ -79,7 +78,7 @@
 							<div class="ui-field-contain">
 								<select name="selPlace" id="selPlace" data-native-menu="false">
 									<option value="Superstore">Superstore</option>
-									<option value="51CheckOut">51CheckOut</option>
+									<option value="Checkout51">Checkout51</option>
 									<option value="NoFrill">NoFrill</option>
 									<option value="Canadian Tire">Canadian Tire</option>
 									<option value="Groupon Snap">Groupon Snap</option>

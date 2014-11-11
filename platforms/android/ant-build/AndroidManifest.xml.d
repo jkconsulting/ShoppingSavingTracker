@@ -1,2 +1,2 @@
-C:\MyApps\hello\platforms\android\ant-build\AndroidManifest.xml : \
-C:\MyApps\hello\platforms\android\AndroidManifest.xml \
+C:\MyApps\ShoppingSavingTracker\platforms\android\ant-build\AndroidManifest.xml : \
+C:\MyApps\ShoppingSavingTracker\platforms\android\AndroidManifest.xml \

@@ -15,8 +15,8 @@ function errorHandler(transaction, error) {
 // this is called when a successful transaction happens
 function successCallBack() {
 	//alert("DEBUGGING: success");
-	thisWeekSavingSQL = "SELECT	 SUM(Amount) AS Total FROM Savings;";
-	runSumSql($("#thisWeekSaving"), thisWeekSavingSQL);	
+	
+	refreshTotal();
 }
  
 function nullHandler(){
@@ -49,7 +49,14 @@ function onBodyLoad(){
 		// note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
 		// easily from the table.
 		//alert("create table");
-		tx.executeSql( 'CREATE TABLE IF NOT EXISTS Savings(SavingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SavingDate DATETIME NOT NULL, Amount MONEY NOT NULL, Product TEXT, Royalty TEXT, Place TEXT, Type TEXT, CreatedTime DATETIME)', [], nullHandler, errorHandler);
+		
+		//HTML5 uses SQLite, which does not have a storage class set aside for storing dates and/or times
+		//See documetation: http://www.sqlite.org/datatype3.html
+		//Store DATETIME that will be used for calculation as UTC
+
+		//tx.executeSql( 'DROP TABLE Savings;' );
+		tx.executeSql( 'CREATE TABLE IF NOT EXISTS Savings(SavingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SavingDate INTEGER NOT NULL, Amount MONEY NOT NULL, Product TEXT, Royalty TEXT, Place TEXT, Type TEXT, CreatedTime DATETIME)', [], nullHandler, errorHandler);
+
 	},errorHandler,successCallBack); 
 }
  
@@ -80,8 +87,9 @@ function ListDBValues(ctrl) {
 					//alert("here: " + result.rows.length);
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
-						//alert(row.Total);
-						ctrl.append('<br>|' + row.SavingID + '|' + row.SavingDate + '|' + row.Amount + '|' + row.Product + '|' + row.Royalty + '|' + row.Place + '|' + row.Type + '|' + row.CreatedTime);
+						var d = moment(row.SavingDate);
+						//alert(d);
+						ctrl.append('<br>|' + row.SavingID + '|' + d.format(DT_FORMAT) + '|' + row.Amount + '|' + row.Product + '|' + row.Royalty + '|' + row.Place + '|' + row.Type + '|' + row.CreatedTime);
 					}
 					if (result.rows.length == 0){
 						//alert("No data");
@@ -116,11 +124,11 @@ function runSumSql(ctrl, sqlStr) {
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(0);
 						//alert(row.Total);
-						ctrl.html(row.Total);
+						ctrl.html("$" + row.Total.toFixed(2) + " (" + row.NumSavings + ")");
 					}
 					if (result.rows.length == 0){
 						//alert("No data");
-						ctrl.html('0');
+						ctrl.html('$0.00');
 					}
 				}else{
 					alert("No Result");
@@ -130,36 +138,6 @@ function runSumSql(ctrl, sqlStr) {
 	
 	return;
 
-}
- 
-// this is the function that puts values into the database using the values from the text boxes on the screen
-function AddValueToDB() {
- 
-	//alert("AddValueToDB");
-	//alert($('#txFirstName').val());
-	
-	if (!window.openDatabase) {
-		alert('Databases are not supported in this browser.');
-		return;
-	}
- 
- 	db.transaction(function(tx){ 
-		// you can uncomment this next line if you want the User table to be empty each time the application runs
-		// tx.executeSql( 'DROP TABLE User',nullHandler,nullHandler);
-		 
-		// this line actually creates the table User if it does not exist and sets up the three columns and their types
-		// note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
-		// easily from the table.
-		//alert("add value to table");
-		//alert($('#txFirstName').val() + " " + $('#txLastName').val());
-		tx.executeSql( 'INSERT INTO Savings(SavingDate, Amount, Product, Royalty, Place, Type, CreatedTime) VALUES (?,?,?,?,?,?,?)',[$('#txtSavingDate').val(), $('#txtAmount').val(), $('#txtProduct').val(), $('#selRoyalty').val(), $('#selPlace').val(), $('#selType').val(), GetCurrentTime()], nullHandler,errorHandler);
-	},errorHandler,successCallBack); 
-	
-	// this calls the function that will show what is in the User table in the database
-	//ListDBValues();
-	 
-return false;
- 
 }
 
 // this is the function that puts values into the database using the values from the text boxes on the screen
@@ -190,32 +168,4 @@ function ClearData() {
 	 
 return false;
  
-}
-
-function GetCurrentTime(){
-/*
-	var currentTime = new Date();
-	var month = currentTime.getMonth() + 1;
-	var day = currentTime.getDate();
-	var year = currentTime.getFullYear();
-	var hours = currentTime.getHours();
-	var minutes = currentTime.getMinutes();
-	if (minutes < 10){
-		minutes = "0" + minutes;
-	}
-	
-	var dt = month + "/" + day + "/" + year + " " + hours + ":" + minutes;
-	//alert(dt);
-*/
-/*
-	var timeString = month + "/" + day + "/" + year + ((hours > 12) ? hours - 12 : hours);
-	timeString  += ((minutes < 10) ? ":0" : ":") + minutes;
-	timeString  += ((seconds < 10) ? ":0" : ":") + seconds;
-	timeString  += (hours >= 12) ? " P.M." : " A.M.";
- */ 
-
-	//require date.js
-	var myDt = new Date().toString('yyyy-MM-ddTHH:mm:ss');
-
-	return (myDt);
 }

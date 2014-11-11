@@ -35,12 +35,12 @@
     <feature name="InAppBrowser">
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
-    <name>HelloWorld</name>
+    <name>ShoppingSavingTracker</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A simple app to track your shopping savings.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="admin@jkconsulting.com" href="http://jkconsulting.com">
+        JKConsulting
     </author>
     <content src="index.html" />
     <access origin="*" />

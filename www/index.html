@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- need to load this common javascript first as functions are being used by other javascripts -->
 		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src="lib/moment.min.js"></script>
 		<script type="text/javascript" src="lib/date.js"></script>
 		<script type="text/javascript" src="lib/jquery.formatCurrency-1.4.0.js"></script>
 		<!--
@@ -88,7 +89,7 @@
 					</tr>
 					<tr>
 						<td>From Source:</td>
-						<td></td>
+						<td><span id="sourceSaving"></span></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -104,7 +105,9 @@
 				</table>
 			</div>
 			<hr>
-			<span id="savingHistory"></span>
+
+				<span id="savingHistory"></span>
+
 		</div><!-- /content -->
 		<div data-role="footer">
 			<h4><div class="ui-btn ui-input-btn ui-shadow ui-corner-all">
@@ -147,8 +150,8 @@
 				thisWeekSavingSQL += "AND SavingDate < curdate() + INTERVAL 8-DAYOFWEEK(curdate()) DAY;";
 	*/				
 				var thisWeekSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings ";
-				thisWeekSavingSQL += "WHERE SavingDate >= " + GetDateUTC(weekStartDt) + " ";
-				thisWeekSavingSQL += "AND SavingDate < " + GetDateUTC(weekEndDt) + ";";
+				thisWeekSavingSQL += "WHERE SavingDate >= " + moment().startOf('week') + " ";
+				thisWeekSavingSQL += "AND SavingDate < " + moment().endOf("week") + ";";
 				
 				var daysInMonth=Date.getDaysInMonth(currDt.getFullYear(),currDt.getMonth());
 				monthStartDt = new Date(currDt.getFullYear(), currDt.getMonth(), 1);
@@ -156,23 +159,23 @@
 				//alert("Month Start: " + monthStartDt + ", Month End: " + monthEndDt);
 				
 				var thisMonthSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings ";
-				thisMonthSavingSQL += "WHERE SavingDate >= " + GetDateUTC(monthStartDt) + " ";
-				thisMonthSavingSQL += "AND SavingDate < " + GetDateUTC(monthEndDt) + ";";
+				thisMonthSavingSQL += "WHERE SavingDate >= " + moment().startOf('month') + " ";
+				thisMonthSavingSQL += "AND SavingDate < " + moment().endOf("month") + ";";
 				
 				yearStartDt = new Date(currDt.getFullYear(), 0, 1);
 				yearEndDt = new Date(currDt.getFullYear(), 11, 31);
 				//alert("Year Start: " + yearStartDt + ", Year End: " + yearEndDt);				
 
 				var thisYearSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings ";
-				thisYearSavingSQL += "WHERE SavingDate >= " + GetDateUTC(yearStartDt) + " ";
-				thisYearSavingSQL += "AND SavingDate < " + GetDateUTC(yearEndDt) + ";";
+				thisYearSavingSQL += "WHERE SavingDate >= " + moment().startOf('year') + " ";
+				thisYearSavingSQL += "AND SavingDate < " + moment().endOf("year") + ";";
 				
 				var allSavingSQL = "SELECT SUM(Amount) AS Total, COUNT(*) AS NumSavings FROM Savings;";
 				
 				runSumSql($("#thisWeekSaving"), thisWeekSavingSQL);
 				runSumSql($("#thisMonthSaving"), thisMonthSavingSQL);
 				runSumSql($("#thisYearSaving"), thisYearSavingSQL);
-				runSumSql($("#allSaving"), allSavingSQL);				
+				runSumSql($("#allSaving"), allSavingSQL);
 			};
 			
 		</script>

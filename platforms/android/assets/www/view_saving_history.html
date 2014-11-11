@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+	<head>
+		<title>View Saving History</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!--<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>-->
+		
+		<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
+		<!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.min.css" />
+	<link type="text/css" href="http://cdn.jtsage.com/css/demos.css" rel="stylesheet" />
+    <!-- NOTE: Script load order is significant! -->
+	
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jtsage.com/external/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="http://dev.jtsage.com/jQM-DateBox/js/doc.js"></script>
+    <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.core.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.calbox.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.datebox.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.flipbox.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.slidebox.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.customflip.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jtsage.com/datebox/i18n/jqm-datebox.lang.utf8.js"></script>
+    <script type="text/javascript">
+    jQuery.extend(jQuery.mobile,
+    {
+      ajaxEnabled: false
+    });
+    </script>
+
+	<!--<script type="text/javascript" src="js/database.js"></script>-->
+	
+	</head>
+	<body>
+		<div data-role="page">
+		<div data-role="header" class="ui-btn ui-input-btn ui-shadow ui-corner-all">
+			<a href="#" class="ui-btn ui-input-btn ui-shadow ui-icon-arrow-l ui-corner-all ui-btn-icon-left" data-rel="back" id="btnGoBack">Go Back</a>
+			<h1>Saving History</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+			<div>
+				<table>
+					<tr>
+						<td>Saving Date</td>
+						<td>Amount</td>
+						<td>Product</td>
+						<td>Royalty</td>
+						<td>Place</td>
+						<td>Type</td>
+						<td>Created</td>
+					</tr>				
+				</table>
+				<span id="savingHistory"></span>				
+			</div>
+		</div><!-- /content -->
+		<div data-role="footer">
+			<h4></h4>
+		</div><!-- /footer -->
+		</div><!-- /page -->
+	</body>
+
+</html>
