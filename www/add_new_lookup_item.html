@@ -38,14 +38,7 @@
     </script>
 
 	<script type="text/javascript" src="js/db_add_new_lookup_item.js"></script>
-
-	<script>
-		$( "#btnSave" ).click( function() {
-			AddValueToDB();
-		});
-		
-	</script>	
-		
+	
 	</head>
 	<body onload="onBodyLoad()">
 		<div data-role="page">
@@ -88,7 +81,17 @@
 			<h4></h4>
 		</div><!-- /footer -->
 		</div><!-- /page -->
+
+	<script>
+		$( "#btnSave" ).click( function() {
+			AddValueToDB();
+		});
 		
+		var typeUrlParam = document.location.search.replace("?type=","");
+		//alert("type = " + typeUrlParam);
+		$( "#selItemType" ).val(typeUrlParam);
+	</script>	
+	
 	</body>
 	
 </html>

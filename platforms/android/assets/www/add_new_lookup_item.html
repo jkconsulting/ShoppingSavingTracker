@@ -29,6 +29,7 @@
     <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.slidebox.min.js"></script>
     <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.customflip.min.js"></script>
     <script type="text/javascript" src="http://cdn.jtsage.com/datebox/i18n/jqm-datebox.lang.utf8.js"></script>
+	
     <script type="text/javascript">
     jQuery.extend(jQuery.mobile,
     {
@@ -36,79 +37,40 @@
     });
     </script>
 
-	<script type="text/javascript" src="js/db_add_new_saving.js"></script>
-	
+	<script type="text/javascript" src="js/db_add_new_lookup_item.js"></script>
+
+	<script>
+		$( "#btnSave" ).click( function() {
+			AddValueToDB();
+		});
+		
+	</script>	
+		
 	</head>
 	<body onload="onBodyLoad()">
 		<div data-role="page">
 		<div data-role="header" class="ui-btn ui-input-btn ui-shadow ui-corner-all">
 			<a href="#" class="ui-btn ui-input-btn ui-shadow ui-icon-arrow-l ui-corner-all ui-btn-icon-left" data-rel="back" id="btnGoBack">Go Back</a>
-			<h1>Add New Saving</h1>
+			<h1>Add New Lookup Item</h1>
 		</div><!-- /header -->
 		<div data-role="content">
 			<div>
 				<table>
 					<tr>
-						<td>Date:</td>
-						<td><input name="txtSavingDate" id="txtSavingDate" type="text" data-role="datebox" data-options='{"mode":"datebox"}' /></td>
-					</tr>
-					<tr>
-						<td>Amount:</td>
-						<td><input data-clear-btn="true" name="txtAmount" id="txtAmount" value="" type="tel"></td>
-					</tr>
-					<tr>
-						<td>Product:</td>
-						<td><input name="txtProduct" id="txtProduct" value="" type="text"></td>
-					</tr>
-					<tr>
+						<td>Lookup Item Type:</td>
 						<td>
-							<a href="add_new_lookup_item.html?type=Royalty" class="ui-btn ui-input-btn ui-shadow ui-icon-plus ui-corner-all ui-btn-icon-right" id="btnAddNewRoyalty">Royalty: </a>
-						</td>
-						<td>
-							<div id="divRoyalty" class="ui-field-contain">
-							<!--
-								<select name="selRoyalty" id="selRoyalty" data-native-menu="false">
-									<option value="PCPLUS">PCPLUS</option>
-									<option value="Checkout51">Checkout51</option>
-									<option value="Groupon Snap">Groupon Snap</option>
+							<div class="ui-field-contain">
+								<select name="selItemType" id="selItemType" data-native-menu="false">
+									<option value="Royalty">Royalty</option>
+									<option value="MarketPlace">Market Place</option>
+									<option value="SavingType">Saving Type</option>
 								</select>
-							-->	
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<a href="add_new_lookup_item.html?type=MarkPlace" class="ui-btn ui-input-btn ui-shadow ui-icon-plus ui-corner-all ui-btn-icon-right" id="btnAddNewMarketPlace">Market Place: </a>						
-						</td>
-						<td>
-							<div id="divMarketPlace" class="ui-field-contain">
-							<!--
-								<select name="selMarketPlace" id="selMarketPlace" data-native-menu="false">
-									<option value="Superstore">Superstore</option>
-									<option value="Checkout51">Checkout51</option>
-									<option value="NoFrill">NoFrill</option>
-									<option value="Canadian Tire">Canadian Tire</option>
-									<option value="Groupon Snap">Groupon Snap</option>
-								</select>
-							-->	
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="add_new_lookup_item.html?type=SavingType" class="ui-btn ui-input-btn ui-shadow ui-icon-plus ui-corner-all ui-btn-icon-right" id="btnAddNewSavingType">Saving Type: </a>
-						</td>
-						<td>
-							<div id="divSavingType" class="ui-field-contain">
-							<!--
-								<select name="selSavingType" id="selSavingType" data-native-menu="false">
-									<option value="Royalty Points">Royalty Points</option>
-									<option value="Manufacture Coupon">Manufacture Coupon</option>
-									<option value="In-store Coupon">In-store Coupon</option>
-								</select>
-							-->	
-							</div>
-						</td>
+						<td>Lookup Item Value:</td>
+						<td><input name="txtItemValue" id="txtItemValue" value="" type="text"></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -126,14 +88,7 @@
 			<h4></h4>
 		</div><!-- /footer -->
 		</div><!-- /page -->
-
-	<script>
-		$( "#btnSave" ).click( function() {
-			AddValueToDB();
-		});
-			
-	</script>
-	
+		
 	</body>
 	
 </html>
