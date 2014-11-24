@@ -55,7 +55,14 @@ function onBodyLoad(){
 		//Store DATETIME that will be used for calculation as UTC
 
 		//tx.executeSql( 'DROP TABLE Savings;' );
-		tx.executeSql( 'CREATE TABLE IF NOT EXISTS Savings(SavingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SavingDate INTEGER NOT NULL, Amount MONEY NOT NULL, Product TEXT, Royalty TEXT, Place TEXT, Type TEXT, CreatedTime DATETIME)', [], nullHandler, errorHandler);
+		sqlStr1 = 'CREATE TABLE IF NOT EXISTS Savings(SavingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SavingDate INTEGER NOT NULL, Amount MONEY NOT NULL, Product TEXT, Royalty TEXT, Place TEXT, Type TEXT, CreatedTime DATETIME);';
+		sqlStr2 = 'CREATE TABLE IF NOT EXISTS LookupItems(ItemID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ItemType TEXT, ItemValue TEXT);';
+
+		tx.executeSql( sqlStr1, [], nullHandler, errorHandler);
+		//alert(sqlStr1);
+		tx.executeSql( sqlStr2, [], nullHandler, errorHandler);
+		//alert(sqlStr2);
+		//tx.executeSql( 'INSERT INTO LookupItems(ItemType, ItemValue) VALUES (?, ?)',["Royalty", "Testing"], nullHandler, errorHandler);
 
 	},errorHandler,successCallBack); 
 }
@@ -95,6 +102,47 @@ function ListDBValues(ctrl) {
 					if (result.rows.length == 0){
 						//alert("No data");
 						ctrl.append('<br>No History Data');
+					}
+				}
+			},errorHandler);
+	},errorHandler,nullHandler);
+	
+	return;
+
+}
+
+// list the values in the database to the screen using jquery to update the #lbUsers element
+function ListLookupDBValues(ctrl) {
+	//alert("ListLookupDBValues");
+	
+	if (!window.openDatabase) {
+		alert('Databases are not supported in this browser.');
+		return;
+	}
+ 
+	// this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
+	// content and not just keep repeating lines
+	ctrl.html('');
+	
+	// this next section will select all the content from the User table and then go through it row by row
+	// appending the UserId FirstName LastName to the #lbUsers element on the page
+	db.transaction(function(tx) {
+			
+		var sqlStr = 'SELECT * FROM LookupItems;';
+	
+		//alert(sqlStr);
+		tx.executeSql(sqlStr, [],
+			function(tx, result) {
+				//alert(result);
+				if (result != null && result.rows != null) {
+					//alert("here: " + result.rows.length);
+					for (var i = 0; i < result.rows.length; i++) {
+						var row = result.rows.item(i);
+						ctrl.append('<br>|' + row.ItemID + '|' + row.ItemType + '|' + row.ItemValue);
+					}
+					if (result.rows.length == 0){
+						//alert("No data");
+						ctrl.append('<br>No Lookup Data');
 					}
 				}
 			},errorHandler);
@@ -162,6 +210,7 @@ function ClearData() {
 		//alert("add value to table");
 		//alert($('#txFirstName').val() + " " + $('#txLastName').val());
 		tx.executeSql( 'DELETE FROM Savings',[], nullHandler, errorHandler);
+		tx.executeSql( 'DELETE FROM LookupItems',[], nullHandler, errorHandler);
 	},errorHandler,successCallBack); 
 	
 	// this calls the function that will show what is in the User table in the database

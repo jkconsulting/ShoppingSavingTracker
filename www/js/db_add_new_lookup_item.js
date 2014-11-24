@@ -32,9 +32,7 @@ function onBodyLoad(){
 	// This alert is used to make sure the application is loaded correctly
 	// you can comment this out once you have the application working
 	//alert("DEBUGGING: we are in the onBodyLoad() function");
-
-	$("#txtSavingDate").val(moment().format("MM/DD/YYYY"));
-		
+	 
 	if (!window.openDatabase) {
 		// not all mobile devices support databases if it does not, the following alert will display
 		// indicating the device will not be albe to run this application
@@ -45,13 +43,8 @@ function onBodyLoad(){
 	// this line tries to open the database base locally on the device
 	// if it does not exist, it will create it and return a database object stored in variable db
 	db = openDatabase(shortName, version, displayName, maxSize);
-
-	ListLookupItems($("#divRoyalty"), "Royalty");
-	ListLookupItems($("#divMarketPlace"), "MarketPlace");
-	ListLookupItems($("#divSavingType"), "SavingType");	
-	
+/*	 
 	// this line will try to create the table User in the database just created/opened
-/*	
 	db.transaction(function(tx){ 
 		// you can uncomment this next line if you want the User table to be empty each time the application runs
 		// tx.executeSql( 'DROP TABLE User',nullHandler,nullHandler);
@@ -75,8 +68,7 @@ function onBodyLoad(){
 function AddValueToDB() {
  
 	//alert("AddValueToDB");
-	//alert($('#txtSavingDate').val());
-	
+
 	if (!window.openDatabase) {
 		alert('Databases are not supported in this browser.');
 		return;
@@ -89,12 +81,9 @@ function AddValueToDB() {
 		// this line actually creates the table User if it does not exist and sets up the three columns and their types
 		// note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
 		// easily from the table.
-		//alert("add value to table");
-		
-		var savingDateUTC = moment($('#txtSavingDate').val(), DT_FORMAT).valueOf();
-		//alert("Saving Date: " + $('#txtSavingDate').val() + " => " + savingDateUTC);
-		
-		tx.executeSql( 'INSERT INTO Savings(SavingDate, Amount, Product, Royalty, Place, Type, CreatedTime) VALUES (?,?,?,?,?,?,?)',[savingDateUTC, $('#txtAmount').val(), $('#txtProduct').val(), $('#selRoyalty').val(), $('#selMarketPlace').val(), $('#selSavingType').val(), GetCurrentTime()], nullHandler,errorHandler);
+		//alert("add value to table: " + $('#selItemType').val() + ", " + $('#txtItemValue').val());
+			
+		tx.executeSql( 'INSERT INTO LookupItems(ItemType, ItemValue) VALUES (?,?)',[$('#selItemType').val(), $('#txtItemValue').val()], nullHandler, errorHandler);
 	},errorHandler,successCallBack_Add); 
 	
 	// this calls the function that will show what is in the User table in the database
@@ -104,54 +93,3 @@ return false;
  
 }
 
-// list the values in the database to the screen using jquery to update the #lbUsers element
-function ListLookupItems(ctrl, itemType) {
-	//alert("ListLookupItems => ctrl: " + ctrl.val() + ", item type: " + itemType);
-	
-	if (!window.openDatabase) {
-		alert('Databases are not supported in this browser.');
-		return;
-	}
- 
-	// this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
-	// content and not just keep repeating lines
-	//ctrl.remove(); // removes all options
-
-	// this next section will select all the content from the User table and then go through it row by row
-	// appending the UserId FirstName LastName to the #lbUsers element on the page
-	db.transaction(function(tx) {
-		var sqlStr = 'SELECT * FROM LookupItems WHERE ItemType="' + itemType + '" ORDER BY ItemValue;';
-		//alert(sqlStr);
-		
-		tx.executeSql(sqlStr, [],
-			function(tx, result) {
-				//alert(result);
-				if (result != null && result.rows != null) {
-					//alert("here: " + result.rows.length);
-					options = "";
-					for (var i = 0; i < result.rows.length; i++) {
-						var row = result.rows.item(i);
-						//alert(row.ItemValue);
-						//ctrl.append(new Option(row.ItemValue, row.ItemValue));
-						var opt = "<option value='" + row.ItemValue + "'>" + row.ItemValue + "</option>";
-						options += opt;
-						//ctrl.append(opt); 
-						//ctrl.append($('<option></option>').val(row.ItemValue).html(row.ItemValue));
-					}
-					if (result.rows.length == 0){
-						//alert("No data");
-						//ctrl.append('<br>No History Data');
-					}
-					var dropDownHtml = "<select name='sel" + itemType + "' id='sel" + itemType + "' data-native-menu='false'>";
-					dropDownHtml += options;
-					dropDownHtml += "</select>";
-					//alert(dropDownHtml);
-					ctrl.append(dropDownHtml).trigger("create");					
-				}
-			},errorHandler);
-				
-	},errorHandler,nullHandler);
-	
-	return;
-
-}

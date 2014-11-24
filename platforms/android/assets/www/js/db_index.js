@@ -56,6 +56,7 @@ function onBodyLoad(){
 
 		//tx.executeSql( 'DROP TABLE Savings;' );
 		tx.executeSql( 'CREATE TABLE IF NOT EXISTS Savings(SavingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SavingDate INTEGER NOT NULL, Amount MONEY NOT NULL, Product TEXT, Royalty TEXT, Place TEXT, Type TEXT, CreatedTime DATETIME)', [], nullHandler, errorHandler);
+		tx.executeSql( 'CREATE TABLE IF NOT EXISTS Configuration(ConfigID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ConfigType TEXT, ConfigValue TEXT)', [], nullHandler, errorHandler);
 
 	},errorHandler,successCallBack); 
 }

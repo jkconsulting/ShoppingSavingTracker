@@ -16,7 +16,7 @@ function errorHandler(transaction, error) {
 function successCallBack() {
 	//alert("DEBUGGING: success");
 	
-	ListDBValues($("#table-column-toggle"));
+	ListDBValues($("#tblSavingHistory"));
 }
  
 function nullHandler(){
@@ -93,13 +93,13 @@ function ListDBValues(ctrl) {
 						//alert(d);
 						//alert(row.Total);
 						trHTML += '<tr><th>' + row.SavingID + '</th><td>' + d.format(DT_FORMAT);
-						trHTML += '</td><td>' + row.Amount + '</td><td>' + row.Product;
-						trHTML += '</td><td>' + row.Royalty + '</td><td>' + row.Place;
+						trHTML += '</td><td>$' + row.Amount.toFixed(2) + '</td><td>' + row.Royalty;
+						trHTML += '</td><td>' + row.Product + '</td><td>' + row.Place;
 						trHTML += '</td><td>' + row.Type + '</td><td>' + row.CreatedTime + "</td></tr>";
 						//alert(trHTML)
 					}
 					ctrl.append( trHTML );
-					ctrl.table( "refresh" );
+					ctrl.table( "refresh" ); //need to refresh the table for applying the style to new rows added, otherwise, won't work 
 					if (result.rows.length == 0){
 						//alert("No data");
 						ctrl.append('<br>No History Data');

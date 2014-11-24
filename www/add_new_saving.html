@@ -61,40 +61,52 @@
 						<td><input name="txtProduct" id="txtProduct" value="" type="text"></td>
 					</tr>
 					<tr>
-						<td>Royalty:</td>
 						<td>
-							<div class="ui-field-contain">
+							<a href="add_new_lookup_item.html?type=Royalty" class="ui-btn ui-input-btn ui-shadow ui-icon-plus ui-corner-all ui-btn-icon-right" id="btnAddNewRoyalty">Royalty: </a>
+						</td>
+						<td>
+							<div id="divRoyalty" class="ui-field-contain">
+							<!--
 								<select name="selRoyalty" id="selRoyalty" data-native-menu="false">
 									<option value="PCPLUS">PCPLUS</option>
 									<option value="Checkout51">Checkout51</option>
 									<option value="Groupon Snap">Groupon Snap</option>
 								</select>
+							-->	
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td>Place:</td>
 						<td>
-							<div class="ui-field-contain">
-								<select name="selPlace" id="selPlace" data-native-menu="false">
+							<a href="add_new_lookup_item.html?type=MarkPlace" class="ui-btn ui-input-btn ui-shadow ui-icon-plus ui-corner-all ui-btn-icon-right" id="btnAddNewMarketPlace">Market Place: </a>						
+						</td>
+						<td>
+							<div id="divMarketPlace" class="ui-field-contain">
+							<!--
+								<select name="selMarketPlace" id="selMarketPlace" data-native-menu="false">
 									<option value="Superstore">Superstore</option>
 									<option value="Checkout51">Checkout51</option>
 									<option value="NoFrill">NoFrill</option>
 									<option value="Canadian Tire">Canadian Tire</option>
 									<option value="Groupon Snap">Groupon Snap</option>
 								</select>
+							-->	
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td>Type:</td>
 						<td>
-							<div class="ui-field-contain">
-								<select name="selType" id="selType" data-native-menu="false">
+							<a href="add_new_lookup_item.html?type=SavingType" class="ui-btn ui-input-btn ui-shadow ui-icon-plus ui-corner-all ui-btn-icon-right" id="btnAddNewSavingType">Saving Type: </a>
+						</td>
+						<td>
+							<div id="divSavingType" class="ui-field-contain">
+							<!--
+								<select name="selSavingType" id="selSavingType" data-native-menu="false">
 									<option value="Royalty Points">Royalty Points</option>
 									<option value="Manufacture Coupon">Manufacture Coupon</option>
 									<option value="In-store Coupon">In-store Coupon</option>
 								</select>
+							-->	
 							</div>
 						</td>
 					</tr>
@@ -114,13 +126,14 @@
 			<h4></h4>
 		</div><!-- /footer -->
 		</div><!-- /page -->
-		
-		<script>
-			$( "#btnSave" ).click( function() {
-				AddValueToDB();
-			});	
-		</script>	
-		
+
+	<script>
+		$( "#btnSave" ).click( function() {
+			AddValueToDB();
+		});
+			
+	</script>
+	
 	</body>
 	
 </html>
