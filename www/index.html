@@ -108,12 +108,19 @@
 			</div>
 			<hr>
 				<span id="savingHistory"></span>
+				<span id="lookupItems"></span>
 		</div><!-- /content -->
 		<div data-role="footer">
-			<h4><div class="ui-btn ui-input-btn ui-shadow ui-corner-all">
-							Clear Data
-							<input type="button" data-corners="false" data-enhanced="true" value="History" id="btnClearData"></input>
-				</div></h4>
+			<h4>
+				<div class="ui-btn ui-input-btn ui-shadow ui-corner-all">
+					Clear Data
+					<input type="button" data-corners="false" data-enhanced="true" value="History" id="btnClearData"></input>
+				</div>
+				<div class="ui-btn ui-input-btn ui-shadow ui-corner-all">
+					Lookup Items
+					<input type="button" data-corners="false" data-enhanced="true" value="Lookup" id="btnLookupItems"></input>
+				</div>				
+			</h4>
 							
 		</div><!-- /footer -->
 		</div><!-- /page -->
@@ -121,6 +128,9 @@
 		<script>
 			$( "#btnViewHistory" ).click( function() {
 				ListDBValues($("#savingHistory"));
+			});
+			$( "#btnLookupItems" ).click( function() {
+				ListLookupDBValues($("#lookupItems"));
 			});
 			$( "#btnClearData" ).click( function() {
 				ClearData();
