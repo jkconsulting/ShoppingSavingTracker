@@ -4,7 +4,7 @@ var shortName = 'ShoppingSavingDB';
 var version = '1.0';
 var displayName = 'ShoppingSavingDB';
 var maxSize = 65535;
-
+  
 //document.addEventListener("deviceready", onBodyLoad, false);
  
 // this is called when an error happens in a transaction
@@ -32,11 +32,7 @@ function onBodyLoad(){
 	// This alert is used to make sure the application is loaded correctly
 	// you can comment this out once you have the application working
 	//alert("DEBUGGING: we are in the onBodyLoad() function");
-	
-	var type = $(this).data("url").split("?")[1];
-	type = type.replace("type=",""); 
-	alert("type=" + type);
-	
+ 			
 	if (!window.openDatabase) {
 		// not all mobile devices support databases if it does not, the following alert will display
 		// indicating the device will not be albe to run this application

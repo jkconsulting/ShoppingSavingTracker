@@ -15,8 +15,7 @@ function errorHandler(transaction, error) {
 // this is called when a successful transaction happens
 function successCallBack() {
 	//alert("DEBUGGING: success");
-	
-	ListDBValues($("#tblSavingHistory"));
+
 }
  
 function nullHandler(){
@@ -39,7 +38,8 @@ function onBodyLoad(){
 	// this line tries to open the database base locally on the device
 	// if it does not exist, it will create it and return a database object stored in variable db
 	db = openDatabase(shortName, version, displayName, maxSize);
-	 
+
+/*	
 	// this line will try to create the table User in the database just created/opened
 	db.transaction(function(tx){ 
 		// you can uncomment this next line if you want the User table to be empty each time the application runs
@@ -55,9 +55,11 @@ function onBodyLoad(){
 		//Store DATETIME that will be used for calculation as UTC
 		
 		//tx.executeSql( 'DROP TABLE Savings;' );
-		tx.executeSql( 'CREATE TABLE IF NOT EXISTS Savings(SavingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SavingDate INTEGER NOT NULL, Amount MONEY NOT NULL, Product TEXT, Royalty TEXT, Place TEXT, Type TEXT, CreatedTime DATETIME)', [], nullHandler, errorHandler);
+		//tx.executeSql( 'CREATE TABLE IF NOT EXISTS Savings(SavingID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, SavingDate INTEGER NOT NULL, Amount MONEY NOT NULL, Product TEXT, Royalty TEXT, Place TEXT, Type TEXT, CreatedTime DATETIME)', [], nullHandler, errorHandler);
 
 	},errorHandler,successCallBack); 
+*/	
+	ListDBValues($("#tblSavingHistory"));
 }
  
 // list the values in the database to the screen using jquery to update the #lbUsers element

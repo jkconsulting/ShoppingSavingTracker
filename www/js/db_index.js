@@ -210,7 +210,7 @@ function ClearData() {
 		//alert("add value to table");
 		//alert($('#txFirstName').val() + " " + $('#txLastName').val());
 		tx.executeSql( 'DELETE FROM Savings',[], nullHandler, errorHandler);
-		tx.executeSql( 'DELETE FROM LookupItems',[], nullHandler, errorHandler);
+		//tx.executeSql( 'DELETE FROM LookupItems',[], nullHandler, errorHandler);
 	},errorHandler,successCallBack); 
 	
 	// this calls the function that will show what is in the User table in the database

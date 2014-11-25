@@ -1,19 +1,20 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Add New Saving</title>
+		<title>View Saving History</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- need to load this common javascript first as functions are being used by other javascripts -->
 		<script type="text/javascript" src="js/global.js"></script>
 		<script type="text/javascript" src="lib/moment.min.js"></script>
 		<script type="text/javascript" src="lib/date.js"></script>
-		
-		<!--<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>-->
-		
-		<!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
-		<!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
-
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<script type="text/javascript" src="lib/jquery.formatCurrency-1.4.0.js"></script>
+		<!--
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		-->
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.min.css" />
 	<link type="text/css" href="http://cdn.jtsage.com/css/demos.css" rel="stylesheet" />
     <!-- NOTE: Script load order is significant! -->
@@ -29,7 +30,6 @@
     <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.slidebox.min.js"></script>
     <script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.customflip.min.js"></script>
     <script type="text/javascript" src="http://cdn.jtsage.com/datebox/i18n/jqm-datebox.lang.utf8.js"></script>
-	
     <script type="text/javascript">
     jQuery.extend(jQuery.mobile,
     {
@@ -37,61 +37,67 @@
     });
     </script>
 
-	<script type="text/javascript" src="js/db_add_new_lookup_item.js"></script>
+	<script type="text/javascript" src="js/db_view_lookup_item.js"></script>
 	
 	</head>
 	<body onload="onBodyLoad()">
 		<div data-role="page">
 		<div data-role="header" class="ui-btn ui-input-btn ui-shadow ui-corner-all">
 			<a href="#" class="ui-btn ui-input-btn ui-shadow ui-icon-arrow-l ui-corner-all ui-btn-icon-left" data-rel="back" id="btnGoBack">Go Back</a>
-			<h1>Add New Lookup Item</h1>
+			<h1>Lookup Items</h1>
 		</div><!-- /header -->
 		<div data-role="content">
 			<div>
-				<table>
-					<tr>
-						<td>Lookup Item Type:</td>
-						<td>
-							<div class="ui-field-contain">
+				<table data-role="table" id="tblLookupItem" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">
+				<!--<table data-role="table" id="tblLookupItem" data-mode="reflow" class="ui-body-d ui-shadow table-stripe ui-responsive">-->
+					<thead>
+						<tr>
+							<th data-priority="3"><abbr title="Item ID">ID</abbr></th>
+							<th><abbr title="Item Type">Type</abbr></th>
+							<th><abbr title="Item Value">Value</abbr></th>
+							<th><!--Edit--></th>							
+							<th><!--Delete--></th>
+						</tr>
+
+						<tr>
+							<th data-priority="3"></th>
+							<th>
 								<select name="selItemType" id="selItemType" data-native-menu="false">
 									<option value="Royalty">Royalty</option>
 									<option value="MarketPlace">Market Place</option>
 									<option value="SavingType">Saving Type</option>
-								</select>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>Lookup Item Value:</td>
-						<td><input name="txtItemValue" id="txtItemValue" value="" type="text"></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td width="34%"><div class="ui-btn ui-input-btn ui-shadow ui-corner-all ui-btn-inline">
-							Save
-							<input type="button" data-corners="false" data-enhanced="true" value="Save" onClick="AddValueToDB()"></input>
-						</div>
-						<!--<a href="index.html" class="ui-btn ui-shadow ui-corner-all" data-transition="pop" id="btnSave">Save</a>-->
-						</td>
-					</tr>					
+								</select>						
+							</th>
+							<th>
+								<input name="txtItemValue" id="txtItemValue" value="" type="text">
+							</th>
+							<th data-priority="2" colspan="2">
+								<a href="#" class="ui-btn ui-input-btn ui-shadow ui-icon-plus ui-corner-all ui-btn-icon-right" id="btnAddNewLookupItem">Save</a>
+							</th>
+						</tr>
+
+					</thead>
+					<tbody>
+
+					</tbody>
 				</table>
-			</div>
+		
+			</div>		
 		</div><!-- /content -->
 		<div data-role="footer">
 			<h4></h4>
 		</div><!-- /footer -->
 		</div><!-- /page -->
-
+		
 	<script>
-		$( "#btnSave" ).click( function() {
+		$( "#btnAddNewLookupItem" ).click( function() {
 			AddValueToDB();
 		});
 		
 		var typeUrlParam = document.location.search.replace("?type=","");
 		//alert("type = " + typeUrlParam);
 		$( "#selItemType" ).val(typeUrlParam);
-	</script>	
-	
+	</script>			
 	</body>
-	
+
 </html>

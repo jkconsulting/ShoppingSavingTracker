@@ -53,6 +53,7 @@ C:\MyApps\ShoppingSavingTracker\platforms\android\ant-build\res\drawable-xxhdpi\
 C:\MyApps\ShoppingSavingTracker\platforms\android\ant-build\res\drawable-xxhdpi\ic_action_remove.png \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\_where-is-www.txt \
+C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\add_new_lookup_item.html \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\add_new_saving.html \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\cordova.js \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\cordova_plugins.js \
@@ -62,11 +63,14 @@ C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\index.html \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\js \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\lib \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\plugins \
+C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\view_lookup_item.html \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\view_saving_history.html \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\css\index.css \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\img\logo.png \
+C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\js\db_add_new_lookup_item.js \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\js\db_add_new_saving.js \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\js\db_index.js \
+C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\js\db_view_lookup_item.js \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\js\db_view_saving_history.js \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\js\global.js \
 C:\MyApps\ShoppingSavingTracker\platforms\android\assets\www\js\index.js \

@@ -33,6 +33,7 @@ function onBodyLoad(){
 	// you can comment this out once you have the application working
 	//alert("DEBUGGING: we are in the onBodyLoad() function");
 
+	//default today's date
 	$("#txtSavingDate").val(moment().format("MM/DD/YYYY"));
 		
 	if (!window.openDatabase) {
@@ -100,7 +101,7 @@ function AddValueToDB() {
 	// this calls the function that will show what is in the User table in the database
 	//ListDBValues();
 	 
-return false;
+	return false;
  
 }
 
@@ -113,8 +114,7 @@ function ListLookupItems(ctrl, itemType) {
 		return;
 	}
  
-	// this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
-	// content and not just keep repeating lines
+	// this line clears out any content in the element on the page
 	//ctrl.remove(); // removes all options
 
 	// this next section will select all the content from the User table and then go through it row by row
@@ -132,11 +132,11 @@ function ListLookupItems(ctrl, itemType) {
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
 						//alert(row.ItemValue);
-						//ctrl.append(new Option(row.ItemValue, row.ItemValue));
 						var opt = "<option value='" + row.ItemValue + "'>" + row.ItemValue + "</option>";
 						options += opt;
-						//ctrl.append(opt); 
-						//ctrl.append($('<option></option>').val(row.ItemValue).html(row.ItemValue));
+						//ctrl.append(opt);  // DIDN'T WORK
+						//ctrl.append(new Option(row.ItemValue, row.ItemValue)); //DIDN'T WORK
+						//ctrl.append($('<option></option>').val(row.ItemValue).html(row.ItemValue)); // DIDN'T WORK
 					}
 					if (result.rows.length == 0){
 						//alert("No data");
@@ -146,7 +146,7 @@ function ListLookupItems(ctrl, itemType) {
 					dropDownHtml += options;
 					dropDownHtml += "</select>";
 					//alert(dropDownHtml);
-					ctrl.append(dropDownHtml).trigger("create");					
+					ctrl.append(dropDownHtml).trigger("create"); //this will trigger the re-creation for applying the style
 				}
 			},errorHandler);
 				
